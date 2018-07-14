@@ -1,0 +1,16 @@
+version: '3.6'
+services:
+  c2: 
+    image: cassandra:2
+    ports:
+      - target: 9042
+        published: 9042
+        protocol: tcp
+        mode: host
+  c3: 
+    image: cassandra:3
+    ports:
+      - target: 9042
+        published: 9042
+        protocol: tcp
+        mode: host
