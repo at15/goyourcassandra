@@ -69,31 +69,35 @@ func (c *Conn) options() error {
 	fmt.Printf("res length %d\n", bLen)
 	// options response is [string multimap]
 	// `[short]` n, followed by n pair `<k><v>` where `<v>` is `[string list]`
-	nPairs := int16(buf[5+4]<<8 + buf[5+5]) // TODO: what is the right way to read 2 bytes to int16
+	//nPairs := int16(buf[5+4]<<8 + buf[5+5]) // TODO: what is the right way to read 2 bytes to int16
+	nPairs := int16(buf[5+4])<<8 + int16(buf[5+5]) // TODO: is | faster than + ?
 	fmt.Printf("res pairs %d\n", nPairs)
-	offset := 5 + 4 + 2 + 1// header + length + nPairs
+	offset := 5 + 4 + 2// header + length + nPairs
 	options := make(map[string][]string)
 	for i := 0; i < int(nPairs); i++ {
 		// read <k><v>
 		// k is [string]: [short] n, n bytes
-		ksLen := int16(buf[offset]<<8 + buf[offset+1])
-		offset++
+		ksLen := int16(buf[offset])<<8 + int16(buf[offset+1])
+		fmt.Printf("i %d ksLen %d\n", i, ksLen)
+		offset += 2
 		ks := buf[offset : offset+int(ksLen)]
+		fmt.Printf("ks %s\n", ks)
 		offset += int(ksLen)
 		// v is [string list]: [short] n, n strings
-		nStrings := int16(buf[offset]<<8 + buf[offset+1])
-		offset++
+		nStrings := int16(buf[offset])<<8 + int16(buf[offset+1])
+		offset += 2
 		vList := make([]string, 0, nStrings)
 		for j := 0; j < int(nStrings); j++ {
-			vsLen := int16(buf[offset]<<8 + buf[offset+1])
-			offset++
+			vsLen := int16(buf[offset])<<8 + int16(buf[offset+1])
+			fmt.Printf("i %d j %d vsLen %d\n", i, j, vsLen)
+			offset += 2
 			vs := string(buf[offset : offset+int(vsLen)])
 			offset += int(vsLen)
 			vList = append(vList, vs)
 		}
 		options[string(ks)] = vList
 	}
-	fmt.Printf("options %v", options)
+	fmt.Printf("options %v\n", options)
 	// FIXME: it seems I am not reading string properly ...
 	// options map[CQL_VERSION  3.3.1 COMPRESSION  snappy lz4                   :[] :[]]--- PASS: TestConn_Dial (0.00s)
 	return nil
