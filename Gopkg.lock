@@ -25,6 +25,18 @@
   revision = "e80d13ce29ede4452c43dea11e79b9bc8a15b478"
 
 [[projects]]
+  name = "github.com/mattn/go-runewidth"
+  packages = ["."]
+  revision = "9e777a8366cce605130a531d2cd6363d07ad7317"
+  version = "v0.0.2"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/peterh/liner"
+  packages = ["."]
+  revision = "8c1271fcf47f341a9e6771872262870e1ad7650c"
+
+[[projects]]
   name = "gopkg.in/inf.v0"
   packages = ["."]
   revision = "d2d2541c53f18d2a059457998ce2876cc8e67cbf"
@@ -33,6 +45,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6a372eab26451b7383886b2dc1667755310a56fa48927ab91033fe00ece93501"
+  inputs-digest = "2d0440ce9931b525709805fe38a6e8d8aa0f500d79a13420bbfb77d6f15197bc"
   solver-name = "gps-cdcl"
   solver-version = 1

@@ -9,3 +9,10 @@ shell-c3:
 	docker-compose exec c3 /bin/bash
 down:
 	docker-compose down
+
+fmt:
+	gofmt -d -l -w ./cmd ./pkg
+
+install:
+	go install ./cmd/gocqlsh
+	go install ./cmd/goyourcassandra
