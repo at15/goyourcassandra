@@ -34,6 +34,15 @@ func TestListKeyspace(t *testing.T) {
 	}
 	iter := session.Query(descKeyspace).Iter()
 	fmt.Println(iter.Columns())
-	// TODO: it seems I need to use the iter.Scan to scan item out one by one ....
-	//row, err := iter.RowData()
+	for {
+		// New map each iteration
+		row := make(map[string]interface{})
+		if !iter.MapScan(row) {
+			break
+		}
+		// Do things with row
+		if ks, ok := row["keyspace_name"]; ok {
+			fmt.Printf("keyspace_name: %v\n", ks)
+		}
+	}
 }
