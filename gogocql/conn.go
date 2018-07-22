@@ -1,11 +1,13 @@
 package gogocql
 
 import (
+	"encoding/binary"
+	"fmt"
 	"net"
 
 	"github.com/dyweb/gommon/errors" // TODO: define a better error message format and contribute back to upstream
-	"fmt"
-	"encoding/binary"
+
+	fframe "github.com/at15/goyourcassandra/gogocql/frame"
 )
 
 //type ConnConfig struct {
@@ -40,14 +42,12 @@ func (c *Conn) options() error {
 	reqV4 = 0x04 // 0 for request, 4 for version
 	//var streamId int16
 	//streamId = 1 // if we are sync, we don't need streamId
-	var opCode byte
-	opCode = 0x05 // OPTIONS
 	frame := make([]byte, 5+4)
 	frame[0] = reqV4 // version
 	frame[1] = 0     // flags
 	frame[2] = 0     // streamId // TODO: it's bigendian so ...?
 	frame[3] = 1     // streamId
-	frame[4] = opCode
+	frame[4] = byte(fframe.OpOptions)
 	_, err := c.conn.Write(frame)
 	if err != nil {
 		return errors.Wrap(err, "error write frame")
@@ -72,7 +72,7 @@ func (c *Conn) options() error {
 	//nPairs := int16(buf[5+4]<<8 + buf[5+5]) // TODO: what is the right way to read 2 bytes to int16
 	nPairs := int16(buf[5+4])<<8 + int16(buf[5+5]) // TODO: is | faster than + ?
 	fmt.Printf("res pairs %d\n", nPairs)
-	offset := 5 + 4 + 2// header + length + nPairs
+	offset := 5 + 4 + 2 // header + length + nPairs
 	options := make(map[string][]string)
 	for i := 0; i < int(nPairs); i++ {
 		// read <k><v>

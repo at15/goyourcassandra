@@ -6,7 +6,9 @@ import (
 	requir "github.com/stretchr/testify/require"
 )
 
-func TestConn_Dial(t *testing.T)  {
+func TestConn_Dial(t *testing.T) {
+	t.Skip("require cassandra running")
+
 	require := requir.New(t)
 	conn := Conn{}
 	err := conn.dial()

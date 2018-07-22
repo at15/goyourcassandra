@@ -16,3 +16,22 @@ func TestReadShort(t *testing.T) {
 
 	// TODO: test if | is faster than +
 }
+
+// TODO: the benchmark result is 0 for both of them ....
+func BenchmarkReadShort(b *testing.B) {
+	buf := []byte{0, 1}
+	var iPlus int16
+	var iOr int16
+	b.Run("use +", func(b *testing.B) {
+		for i := 0; i < 1000; i++ {
+			iPlus = int16(buf[0])<<8 + int16(buf[1])
+		}
+
+	})
+	b.Run("use |", func(b *testing.B) {
+		for i := 0; i < 1000; i++ {
+			iOr = int16(buf[0])<<8 | int16(buf[1])
+		}
+	})
+	b.Logf("iPlus %d iOr %d", iPlus, iOr)
+}
