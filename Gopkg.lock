@@ -2,6 +2,18 @@
 
 
 [[projects]]
+  name = "github.com/davecgh/go-spew"
+  packages = ["spew"]
+  revision = "346938d642f2ec3594ed81d874461961cd0faa76"
+  version = "v1.1.0"
+
+[[projects]]
+  name = "github.com/dyweb/gommon"
+  packages = ["errors"]
+  revision = "55cec8928d0a7daee2a20ba3e3bb6e3ce56ac523"
+  version = "v0.0.6"
+
+[[projects]]
   branch = "master"
   name = "github.com/gocql/gocql"
   packages = [
@@ -25,6 +37,21 @@
   revision = "e80d13ce29ede4452c43dea11e79b9bc8a15b478"
 
 [[projects]]
+  name = "github.com/pmezard/go-difflib"
+  packages = ["difflib"]
+  revision = "792786c7400a136282c1664665ae0a8db921c6c2"
+  version = "v1.0.0"
+
+[[projects]]
+  name = "github.com/stretchr/testify"
+  packages = [
+    "assert",
+    "require"
+  ]
+  revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
+  version = "v1.2.2"
+
+[[projects]]
   name = "gopkg.in/inf.v0"
   packages = ["."]
   revision = "d2d2541c53f18d2a059457998ce2876cc8e67cbf"
@@ -33,6 +60,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6a372eab26451b7383886b2dc1667755310a56fa48927ab91033fe00ece93501"
+  inputs-digest = "df8ed043e009a5e777c3af106cfb7a72de6a58fcc3aa4bf2268f38bae095e84e"
   solver-name = "gps-cdcl"
   solver-version = 1

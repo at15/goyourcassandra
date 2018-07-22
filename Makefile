@@ -9,3 +9,8 @@ shell-c3:
 	docker-compose exec c3 /bin/bash
 down:
 	docker-compose down
+
+
+.PHONY: fmt
+fmt:
+	gofmt -d -l -w ./gogocql ./pkg
