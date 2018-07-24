@@ -4,13 +4,15 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"os"
 	"strings"
+	"text/tabwriter"
 
 	"github.com/chzyer/readline"
 	"github.com/gocql/gocql"
 )
 
-var connectOnStart bool
+//var connectOnStart bool
 
 var _ readline.AutoCompleter = (*cqlshCompleter)(nil)
 
@@ -25,7 +27,8 @@ type cqlshCompleter struct {
 //   Do("gi", 2) => ["t", "t-shell"], 2
 //   Do("git", 3) => ["", "-shell"], 3
 func (c *cqlshCompleter) Do(line []rune, pos int) (newLine [][]rune, length int) {
-	fmt.Println("line is", string(line))
+	// FIXME: this completion is not working
+	//fmt.Println("line is", string(line))
 	return [][]rune{
 		{'o'},
 		{'i', 't'},
@@ -34,16 +37,15 @@ func (c *cqlshCompleter) Do(line []rune, pos int) (newLine [][]rune, length int)
 
 func main() {
 	fmt.Printf("gocqlsh version %s\n", version)
-	if connectOnStart {
-		cluster := gocql.NewCluster("localhost")
-		cluster.Keyspace = "system"
-		session, err := cluster.CreateSession()
-		if err != nil {
-			log.Fatal(err)
-			return
-		}
-		defer session.Close()
+
+	cluster := gocql.NewCluster("localhost")
+	cluster.Keyspace = "system"
+	session, err := cluster.CreateSession()
+	if err != nil {
+		log.Fatal(err)
+		return
 	}
+	defer session.Close()
 
 	completer := cqlshCompleter{}
 	l, err := readline.NewEx(&readline.Config{
@@ -68,10 +70,32 @@ func main() {
 		}
 		line = strings.TrimSpace(line)
 		switch line {
-		case ":help":
-			fmt.Println("there is no help")
+		case ":help", "help":
+			fmt.Println("sorry, there is no help")
 		default:
-			fmt.Println("unknown", line)
+			// TODO: when using iterator, how to get error message
+			iter := session.Query(line).Iter()
+			cols := iter.Columns()
+			if len(cols) == 0 {
+				fmt.Println("no columns returned")
+				continue
+			}
+			tbl := tabwriter.NewWriter(os.Stdout, 0, 0, 1, ' ', tabwriter.Debug)
+			for _, col := range cols {
+				fmt.Fprintf(tbl, "%s\t", col.Name)
+			}
+			fmt.Fprint(tbl, "\n")
+			for {
+				row := make(map[string]interface{})
+				if !iter.MapScan(row) {
+					break
+				}
+				for _, col := range cols {
+					fmt.Fprintf(tbl, "%v\t", row[col.Name])
+				}
+				fmt.Fprint(tbl, "\n")
+			}
+			tbl.Flush()
 		}
 	}
 }
