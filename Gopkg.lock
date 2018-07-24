@@ -2,37 +2,56 @@
 
 
 [[projects]]
+  digest = "1:b95738a1e6ace058b5b8544303c0871fc01d224ef0d672f778f696265d0f2917"
+  name = "github.com/chzyer/readline"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "62c6fe6193755f722b8b8788aa7357be55a50ff1"
+  version = "v1.4"
+
+[[projects]]
   branch = "master"
+  digest = "1:46bd2995dc829e29fffc157291c8ac16bf4bcac302fb745cafed6fb5c1f98d55"
   name = "github.com/gocql/gocql"
   packages = [
     ".",
     "internal/lru",
     "internal/murmur",
-    "internal/streams"
+    "internal/streams",
   ]
+  pruneopts = "UT"
   revision = "e06f8c1bcd787e6bf0608288b314522f08cc7848"
 
 [[projects]]
   branch = "master"
+  digest = "1:4a0c6bb4805508a6287675fac876be2ac1182539ca8a32468d8128882e9d5009"
   name = "github.com/golang/snappy"
   packages = ["."]
+  pruneopts = "UT"
   revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
 
 [[projects]]
   branch = "master"
+  digest = "1:364b908b9b27b97ab838f2f6f1b1f46281fa29b978a037d72a9b1d4f6d940190"
   name = "github.com/hailocab/go-hostpool"
   packages = ["."]
+  pruneopts = "UT"
   revision = "e80d13ce29ede4452c43dea11e79b9bc8a15b478"
 
 [[projects]]
+  digest = "1:2d1fbdc6777e5408cabeb02bf336305e724b925ff4546ded0fa8715a7267922a"
   name = "gopkg.in/inf.v0"
   packages = ["."]
+  pruneopts = "UT"
   revision = "d2d2541c53f18d2a059457998ce2876cc8e67cbf"
   version = "v0.9.1"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6a372eab26451b7383886b2dc1667755310a56fa48927ab91033fe00ece93501"
+  input-imports = [
+    "github.com/chzyer/readline",
+    "github.com/gocql/gocql",
+  ]
   solver-name = "gps-cdcl"
   solver-version = 1
