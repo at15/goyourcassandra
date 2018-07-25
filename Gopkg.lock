@@ -10,6 +10,20 @@
   version = "v1.4"
 
 [[projects]]
+  digest = "1:5d71f2c054ad08f968fdcbe462d6635129ae221a044ef4777555763a1028bee0"
+  name = "github.com/dyweb/gommon"
+  packages = [
+    "log",
+    "structure",
+    "util/color",
+    "util/hashutil",
+    "util/runtimeutil",
+  ]
+  pruneopts = "UT"
+  revision = "55cec8928d0a7daee2a20ba3e3bb6e3ce56ac523"
+  version = "v0.0.6"
+
+[[projects]]
   branch = "master"
   digest = "1:46bd2995dc829e29fffc157291c8ac16bf4bcac302fb745cafed6fb5c1f98d55"
   name = "github.com/gocql/gocql"
@@ -51,6 +65,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/chzyer/readline",
+    "github.com/dyweb/gommon/log",
     "github.com/gocql/gocql",
   ]
   solver-name = "gps-cdcl"
