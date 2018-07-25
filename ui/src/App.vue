@@ -1,17 +1,21 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+   <h1>GoYourCassandra</h1>
+    <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
+    <DB name="DB1"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
+
+import DB from './components/DB'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    // HelloWorld
+      DB
   }
 }
 </script>
