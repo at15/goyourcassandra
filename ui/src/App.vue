@@ -1,24 +1,12 @@
 <template>
   <div id="app">
-   <h1>GoYourCassandra</h1>
-    <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
-    <DB name="DB1"/>
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
-
-<script>
-// import HelloWorld from './components/HelloWorld.vue'
-
-import DB from './components/DB'
-
-export default {
-  name: 'app',
-  components: {
-    // HelloWorld
-      DB
-  }
-}
-</script>
 
 <style>
 #app {
