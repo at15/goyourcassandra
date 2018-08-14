@@ -80,6 +80,8 @@ func (pool *connPool) get(keyspace string) (*gocql.Session, error) {
 		log.Infof("creating new session for host %s keyspace %s", pool.host, keyspace)
 		cluster := gocql.NewCluster(pool.host)
 		cluster.Keyspace = keyspace
+		// TODO: either allow user to pass it ... or config it in backend
+		cluster.Authenticator = gocql.PasswordAuthenticator{Username: "cassandra", Password: "cassandra"}
 		tSession, err := cluster.CreateSession()
 		if err != nil {
 			log.Errorf("error creating new session for host %s keyspace %s: %s", pool.host, keyspace, err)

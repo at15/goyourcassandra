@@ -27,3 +27,11 @@ Example queries
 -- NOTE: this seems only works with cassandra 2
 select * from system.schema_keyspaces;
 ````
+
+````sql
+CREATE KEYSPACE app WITH REPLICATION = {'class':'SimpleStrategy', 'replication_factor':1};
+CREATE TABLE app.tb1 (id int, s text,  PRIMARY KEY (id));
+INSERT INTO app.tb1 (id, s) VALUES (1, 'apptb11');
+INSERT INTO app.tb1 (id, s) VALUES (2, 'apptb12');
+SELECT * FROM app.tb1
+````
