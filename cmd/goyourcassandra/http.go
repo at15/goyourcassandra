@@ -4,6 +4,8 @@ import (
 	"net/http"
 )
 
+// NOTE: copied from https://github.com/dyweb/go.ice/blob/master/ice/transport/http/writer.go
+
 type TrackedWriter struct {
 	w      http.ResponseWriter
 	status int

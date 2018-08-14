@@ -35,12 +35,14 @@
                 //     console.warn(e)
                 // })
                 axios.post('/api/query', {
+                    host: 'localhost',
                     keyspace: 'system',
                     query: this.sql
                 }).then(res => {
                     this.result = JSON.stringify(res.data)
                 }, err => {
                     // TODO: it seems when server 500, err does not contain body?
+                    // eslint-disable-next-line
                     console.warn(err)
                 }).catch(e => {
                     // eslint-disable-next-line
