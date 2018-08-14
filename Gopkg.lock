@@ -10,8 +10,23 @@
   version = "v1.4"
 
 [[projects]]
+  digest = "1:dfe631bd27411eefd80be792fb8ad8f3eb38b7fa848dd6e6df0d27752bcfa516"
+  name = "github.com/dyweb/gommon"
+  packages = [
+    "errors",
+    "log",
+    "structure",
+    "util/color",
+    "util/hashutil",
+    "util/runtimeutil",
+  ]
+  pruneopts = "UT"
+  revision = "1eed5cf307f93a74ac194ccca059beb2f93a14ac"
+  version = "v0.0.7"
+
+[[projects]]
   branch = "master"
-  digest = "1:46bd2995dc829e29fffc157291c8ac16bf4bcac302fb745cafed6fb5c1f98d55"
+  digest = "1:ffd7449d0e64f2cae38da696c7f00badf0a9fa837e307d714e663218c93f8837"
   name = "github.com/gocql/gocql"
   packages = [
     ".",
@@ -20,7 +35,7 @@
     "internal/streams",
   ]
   pruneopts = "UT"
-  revision = "e06f8c1bcd787e6bf0608288b314522f08cc7848"
+  revision = "045d8d6abc70b5bd02bb18b8fdb05ee54d8c87aa"
 
 [[projects]]
   branch = "master"
@@ -39,6 +54,30 @@
   revision = "e80d13ce29ede4452c43dea11e79b9bc8a15b478"
 
 [[projects]]
+  digest = "1:870d441fe217b8e689d7949fef6e43efbc787e50f200cb1e70dbca9204a1d6be"
+  name = "github.com/inconshreveable/mousetrap"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "76626ae9c91c4f2a10f34cad8ce83ea42c93bb75"
+  version = "v1.0"
+
+[[projects]]
+  digest = "1:872fa275c31e1f9db31d66fa9b1d4a7bb9a080ff184e6977da01f36bfbe07f11"
+  name = "github.com/spf13/cobra"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "ef82de70bb3f60c65fb8eebacbb2d122ef517385"
+  version = "v0.0.3"
+
+[[projects]]
+  digest = "1:dab83a1bbc7ad3d7a6ba1a1cc1760f25ac38cdf7d96a5cdd55cd915a4f5ceaf9"
+  name = "github.com/spf13/pflag"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "9a97c102cda95a86cec2345a6f09f55a939babf5"
+  version = "v1.0.2"
+
+[[projects]]
   digest = "1:2d1fbdc6777e5408cabeb02bf336305e724b925ff4546ded0fa8715a7267922a"
   name = "gopkg.in/inf.v0"
   packages = ["."]
@@ -51,7 +90,10 @@
   analyzer-version = 1
   input-imports = [
     "github.com/chzyer/readline",
+    "github.com/dyweb/gommon/errors",
+    "github.com/dyweb/gommon/log",
     "github.com/gocql/gocql",
+    "github.com/spf13/cobra",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

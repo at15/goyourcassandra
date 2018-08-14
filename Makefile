@@ -31,3 +31,7 @@ dep-update:
 
 dep-install:
 	dep ensure
+
+.PHONY: serve
+serve:
+	goyourcassandra
