@@ -3,7 +3,9 @@
         <div>
             <!-- TODO: totally forgot how to layout a form -->
             <h2>DB: {{ name }}</h2>
+            <label>host</label>
             <input type="text" v-model="host">
+            <label>keyspace</label>
             <input type="text" v-model="keyspace">
             <textarea cols="30" rows="10" placeholder="enter CQL" v-model="sql"></textarea>
             <button v-on:click="query">query</button>
@@ -14,9 +16,9 @@
             <table>
                 <thead>
                 <!-- NOTE: it's value, key ... -->
-                <th v-for="(col, index) in cols" :key="index">
+                <tr v-for="(col, index) in cols" :key="index">
                     {{col}}
-                </th>
+                </tr>
                 </thead>
                 <tbody>
                 <tr v-for="(row, index) in rows" :key="index">
@@ -26,6 +28,29 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div>
+            <h2>Keyspace</h2>
+            <button v-on:click="fetchKeyspace">Fetch</button>
+        </div>
+        <div>
+            <div v-for="(tbl, name) in keyspaceTables" :key="name">
+                {{name}}
+                <table>
+                    <thead>
+                    <tr>
+                        <td>name</td>
+                        <td>type</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(colName, index) in tbl.OrderedColumns" :key="index">
+                        <td>{{colName}}</td>
+                        <td>{{tbl.Columns[colName]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </template>
@@ -46,6 +71,7 @@
                 result: '',
                 cols: [],
                 rows: [],
+                keyspaceTables: {},
             }
         },
         methods: {
@@ -92,6 +118,29 @@
                     this.rows = rows
                     // eslint-disable-next-line
                     console.log(this.rows)
+                }, err => {
+                    // TODO: it seems when server 500, err does not contain body?
+                    // eslint-disable-next-line
+                    console.warn(err)
+                }).catch(e => {
+                    // eslint-disable-next-line
+                    console.warn(e)
+                })
+            },
+            fetchKeyspace: function () {
+                axios.get('/api/keyspace', {
+                    params: {
+                        host: this.host,
+                        keyspace: this.keyspace,
+                    }
+                }).then(res => {
+                    let decoded = res.data
+                    // TODO: check if there is error
+                    // TODO: anyway to give it type? ... now I miss typescript ...
+                    // eslint-disable-next-line
+                    console.log(decoded)
+                    this.keyspaceTables = decoded.Tables
+
                 }, err => {
                     // TODO: it seems when server 500, err does not contain body?
                     // eslint-disable-next-line

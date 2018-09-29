@@ -5,8 +5,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/dyweb/gommon/errors"
+
 	"github.com/at15/goyourcassandra/pkg/types"
-	dlog "github.com/dyweb/gommon/log"
 )
 
 type Server struct {
@@ -22,44 +23,50 @@ func New() (*Server, error) {
 	return &srv, nil
 }
 
+// TODO: might pass query in get url as well, this makes life easier when copy and paste
 func (srv *Server) handleQuery(res http.ResponseWriter, req *http.Request) {
 	b, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		http.Error(res, err.Error(), 400)
 		return
 	}
-	var q types.Request
+	var q types.QueryRequest
 	if err := json.Unmarshal(b, &q); err != nil {
 		http.Error(res, err.Error(), 400)
 		return
 	}
 	qRes, err := srv.hosts.Query(q.Host, q.Keyspace, q.Query)
 	if err != nil {
-		http.Error(res, err.Error(), 500)
+		write500(res, err)
 		return
 	}
-	bRes, err := json.Marshal(*qRes)
+	writeJSON(res, *qRes)
+}
+
+// http://localhost:8088/api/keyspace?host=localhost&keyspace=system
+func (srv *Server) handleKeyspace(res http.ResponseWriter, req *http.Request) {
+	q := req.URL.Query()
+	host := q.Get("host")
+	if host == "" {
+		write400(res, errors.New("host is required in query parameter"))
+		return
+	}
+	ks := q.Get("keyspace")
+	if ks == "" {
+		write400(res, errors.New("keyspace is required in query parameter"))
+		return
+	}
+
+	sess, err := srv.hosts.get(host).get(ks)
 	if err != nil {
-		http.Error(res, err.Error(), 500)
+		write500(res, err)
 		return
 	}
-	res.Write(bRes)
-}
-
-func (srv *Server) Handler() http.Handler {
-	return srv.mux
-}
-
-func (srv *Server) HandlerWithLogger() http.Handler {
-	return http.HandlerFunc(func(res http.ResponseWriter, r *http.Request) {
-		tw := &TrackedWriter{w: res, status: 200}
-		srv.mux.ServeHTTP(tw, r)
-		log.InfoF("http", dlog.Fields{
-			dlog.Str("remote", r.RemoteAddr),
-			dlog.Str("proto", r.Proto),
-			dlog.Str("url", r.URL.String()),
-			dlog.Int("size", tw.Size()),
-			dlog.Int("status", tw.Status()),
-		})
-	})
+	// TODO: it is returning a table called IndexInfo which seems does not exists ....
+	meta, err := sess.KeyspaceMetadata(ks)
+	if err != nil {
+		write500(res, errors.Wrap(err, "error get keyspace meta using gocql"))
+		return
+	}
+	writeJSON(res, *meta)
 }

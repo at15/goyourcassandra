@@ -35,7 +35,7 @@ func (pool *hostPool) get(host string) *connPool {
 	return h
 }
 
-func (pool *hostPool) Query(host, keyspace, query string) (*types.Result, error) {
+func (pool *hostPool) Query(host, keyspace, query string) (*types.QueryResult, error) {
 	p := pool.get(host)
 	return p.Query(keyspace, query)
 }
@@ -78,7 +78,7 @@ func (pool *connPool) get(keyspace string) (*gocql.Session, error) {
 	return session, nil
 }
 
-func (pool *connPool) Query(keyspace string, query string) (*types.Result, error) {
+func (pool *connPool) Query(keyspace string, query string) (*types.QueryResult, error) {
 	session, err := pool.get(keyspace)
 	if err != nil {
 		return nil, err
@@ -100,7 +100,7 @@ func (pool *connPool) Query(keyspace string, query string) (*types.Result, error
 		rows = append(rows, row)
 	}
 	err = iter.Close()
-	res := types.Result{
+	res := types.QueryResult{
 		Err:     err,
 		Columns: cols,
 		Rows:    rows,

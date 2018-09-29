@@ -26,8 +26,8 @@ goyourcassandra
 ````bash
 # start cassandra
 make run-c2
-# start api server
-goyourcassandra
+# compile and start api server
+make reload
 # start ui server
 cd ui && make serve
 ````
