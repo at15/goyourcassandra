@@ -32,6 +32,9 @@ dep-update:
 dep-install:
 	dep ensure
 
-.PHONY: serve
+.PHONY: serve reload
 serve:
+	goyourcassandra
+
+reload: install
 	goyourcassandra
