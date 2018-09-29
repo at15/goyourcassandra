@@ -5,6 +5,7 @@ import (
 )
 
 func (srv *Server) routes() {
+	// TODO: need to serve static assets, can use noodle
 	mux := http.NewServeMux()
 	mux.HandleFunc("/ping", func(res http.ResponseWriter, req *http.Request) {
 		res.Write([]byte("pong"))
