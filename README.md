@@ -15,6 +15,24 @@ Web based Cassandra database browser, named after phpmyadmin
   - [ ] pick a framework, might just use jquery
 - [ ] support handling JSON
 
+## Usage
+
+````bash
+make install
+goyourcassandra
+````
+## Dev
+
+````bash
+# start cassandra
+make run-c2
+# compile and start api server
+make reload
+# start ui server
+cd ui && make serve
+````
+
+
 ## Related
 
 - [sosedoff/pgweb](https://github.com/sosedoff/pgweb) Web-based PostgreSQL database browser written in Go.

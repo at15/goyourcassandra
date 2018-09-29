@@ -1,4 +1,4 @@
-package main
+package server
 
 import (
 	"net/http"
@@ -72,7 +72,7 @@ func (tracker *TrackedWriter) Flush() {
 
 // Push returns http.ErrNotSupported if underlying ResponseWriter does not implement http.Pusher
 //
-// Push initiates an HTTP/2 server push, returns ErrNotSupported if the client has disabled push or if push
+// Push initiates an HTTP/2 Server push, returns ErrNotSupported if the client has disabled push or if push
 // is not supported on the underlying connection.
 func (tracker *TrackedWriter) Push(target string, opts *http.PushOptions) error {
 	if p, ok := tracker.w.(http.Pusher); ok {
