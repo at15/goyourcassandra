@@ -98,7 +98,6 @@ export default {
             let cols = [];
             if (data.columns != null) {
               for (let v of data.columns) {
-                // eslint-disable-next-line
                 console.log(v.name);
                 cols.push(v.name);
               }
@@ -109,23 +108,19 @@ export default {
             let rows = [];
             if (data.rows != null) {
               for (let v of data.rows) {
-                // eslint-disable-next-line
                 console.log(v);
                 rows.push(v);
               }
             }
             this.rows = rows;
-            // eslint-disable-next-line
             console.log(this.rows);
           },
           err => {
             // TODO: it seems when server 500, err does not contain body?
-            // eslint-disable-next-line
             console.warn(err);
           }
         )
         .catch(e => {
-          // eslint-disable-next-line
           console.warn(e);
         });
     },
@@ -142,18 +137,15 @@ export default {
             let decoded = res.data;
             // TODO: check if there is error
             // TODO: anyway to give it type? ... now I miss typescript ...
-            // eslint-disable-next-line
             console.log(decoded);
             this.keyspaceTables = decoded.tables;
           },
           err => {
             // TODO: it seems when server 500, err does not contain body?
-            // eslint-disable-next-line
             console.warn(err);
           }
         )
         .catch(e => {
-          // eslint-disable-next-line
           console.warn(e);
         });
     }

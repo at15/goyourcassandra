@@ -42,4 +42,8 @@ SELECT * FROM app.tb1
 
 ````bash
 npm i element-ui -S
+
 ````
+
+- disable error on console.log by adding to rules `'no-console': 'off',`
+- or use `/* eslint-disable no-console */` and `/* eslint-enable no-console */`
