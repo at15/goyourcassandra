@@ -2,10 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <div>
-      <el-button @click="startHacking">Notify</el-button>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/login">Login</router-link>
     </div>
     <router-view/>
   </div>
@@ -35,6 +33,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  min-height: 600px;
 }
 </style>
