@@ -89,8 +89,7 @@ func (pool *connPool) Query(keyspace string, query string) (*types.QueryResult, 
 	//	return errors.Wrap(err, "error scan")
 	//}
 	cols := iter.Columns()
-	// TODO: need to convert TypeInfo
-	//cols[0].TypeInfo.Type()
+	convertedCols := types.CopyColumns(cols)
 	rows := make([]map[string]interface{}, 0)
 	for {
 		row := make(map[string]interface{})
@@ -102,7 +101,7 @@ func (pool *connPool) Query(keyspace string, query string) (*types.QueryResult, 
 	err = iter.Close()
 	res := types.QueryResult{
 		Err:     err,
-		Columns: cols,
+		Columns: convertedCols,
 		Rows:    rows,
 	}
 	if err != nil {

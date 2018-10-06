@@ -68,5 +68,7 @@ func (srv *Server) handleKeyspace(res http.ResponseWriter, req *http.Request) {
 		write500(res, errors.Wrap(err, "error get keyspace meta using gocql"))
 		return
 	}
-	writeJSON(res, *meta)
+	// TODO: maybe allow use the unconverted version for debugging?
+	converted := types.CopyKeyspaceMetadata(meta)
+	writeJSON(res, converted)
 }

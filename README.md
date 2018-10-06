@@ -32,7 +32,6 @@ make reload
 cd ui && make serve
 ````
 
-
 ## Related
 
 - [sosedoff/pgweb](https://github.com/sosedoff/pgweb) Web-based PostgreSQL database browser written in Go.

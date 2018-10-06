@@ -15,9 +15,11 @@
             <!--https://vuejs.org/v2/guide/list.html-->
             <table>
                 <thead>
-                <!-- NOTE: it's value, key ... -->
-                <tr v-for="(col, index) in cols" :key="index">
-                    {{col}}
+                <tr>
+                    <!-- NOTE: it's value, key ... -->
+                    <td v-for="(col, index) in cols" :key="index">
+                        {{col}}
+                    </td>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,9 +46,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="(colName, index) in tbl.OrderedColumns" :key="index">
+                    <tr v-for="(colName, index) in tbl.orderedColumns" :key="index">
                         <td>{{colName}}</td>
-                        <td>{{tbl.Columns[colName]}}</td>
+                        <td>{{tbl.columns[colName]}}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -97,19 +99,19 @@
                     // TODO: anyway to give it type? ... now I miss typescript ...
                     let data = res.data
                     let cols = []
-                    if (data.Columns != null) {
-                        for (let v of data.Columns) {
+                    if (data.columns != null) {
+                        for (let v of data.columns) {
                             // eslint-disable-next-line
-                            console.log(v.Name)
-                            cols.push(v.Name)
+                            console.log(v.name)
+                            cols.push(v.name)
                         }
                     }
                     this.cols = cols
                     // eslint-disable-next-line
                     console.log(this.cols)
                     let rows = []
-                    if (data.Rows != null) {
-                        for (let v of data.Rows) {
+                    if (data.rows != null) {
+                        for (let v of data.rows) {
                             // eslint-disable-next-line
                             console.log(v)
                             rows.push(v)
@@ -139,7 +141,7 @@
                     // TODO: anyway to give it type? ... now I miss typescript ...
                     // eslint-disable-next-line
                     console.log(decoded)
-                    this.keyspaceTables = decoded.Tables
+                    this.keyspaceTables = decoded.tables
 
                 }, err => {
                     // TODO: it seems when server 500, err does not contain body?
