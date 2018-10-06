@@ -19,8 +19,7 @@
                 </el-select>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="onSubmit">立即创建</el-button>
-                <el-button>取消</el-button>
+                <el-button type="primary" @click="onSubmit">Login</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -35,12 +34,7 @@ export default {
         host: "127.0.0.1",
         username: "cassandra",
         password: "cassandra",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
+        keyspace: "system",
       }
     };
   },
@@ -54,8 +48,10 @@ export default {
 
 <style scoped>
 .login-form {
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
+    padding: 50px 50px 20px 30px;
+
+    border-radius: 20px;
+
+    background-color: rgba(255, 255, 255, 0.8);
 }
 </style>
