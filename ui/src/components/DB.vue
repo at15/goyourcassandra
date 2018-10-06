@@ -58,104 +58,108 @@
 </template>
 
 <script>
-    import axios from 'axios'
+import axios from "axios";
 
-    export default {
-        name: "DB",
-        props: {
-            name: String
-        },
-        data() {
-            return {
-                host: 'localhost',
-                keyspace: 'system',
-                sql: '',
-                result: '',
-                cols: [],
-                rows: [],
-                keyspaceTables: {},
+export default {
+  name: "DB",
+  props: {
+    name: String
+  },
+  data() {
+    return {
+      host: "localhost",
+      keyspace: "system",
+      sql: "",
+      result: "",
+      cols: [],
+      rows: [],
+      keyspaceTables: {}
+    };
+  },
+  methods: {
+    query: function() {
+      if (this.sql === "") {
+        // eslint-disable-next-line
+        console.warn("empty sql");
+        return;
+      }
+      axios
+        .post("/api/query", {
+          host: this.host,
+          keyspace: this.keyspace,
+          query: this.sql
+        })
+        .then(
+          res => {
+            this.result = JSON.stringify(res.data);
+            // TODO: check if there is error
+            // TODO: anyway to give it type? ... now I miss typescript ...
+            let data = res.data;
+            let cols = [];
+            if (data.columns != null) {
+              for (let v of data.columns) {
+                // eslint-disable-next-line
+                console.log(v.name);
+                cols.push(v.name);
+              }
             }
-        },
-        methods: {
-            query: function () {
-                if (this.sql === '') {
-                    // eslint-disable-next-line
-                    console.warn('empty sql')
-                    return
-                }
-                // axios.get('/api/ping').then(res => {
-                //     this.sql = res.data
-                // }).catch(e => {
-                //     // eslint-disable-next-line
-                //     console.warn(e)
-                // })
-                axios.post('/api/query', {
-                    host: this.host,
-                    keyspace: this.keyspace,
-                    query: this.sql
-                }).then(res => {
-                    this.result = JSON.stringify(res.data)
-                    // TODO: check if there is error
-                    // TODO: anyway to give it type? ... now I miss typescript ...
-                    let data = res.data
-                    let cols = []
-                    if (data.columns != null) {
-                        for (let v of data.columns) {
-                            // eslint-disable-next-line
-                            console.log(v.name)
-                            cols.push(v.name)
-                        }
-                    }
-                    this.cols = cols
-                    // eslint-disable-next-line
-                    console.log(this.cols)
-                    let rows = []
-                    if (data.rows != null) {
-                        for (let v of data.rows) {
-                            // eslint-disable-next-line
-                            console.log(v)
-                            rows.push(v)
-                        }
-                    }
-                    this.rows = rows
-                    // eslint-disable-next-line
-                    console.log(this.rows)
-                }, err => {
-                    // TODO: it seems when server 500, err does not contain body?
-                    // eslint-disable-next-line
-                    console.warn(err)
-                }).catch(e => {
-                    // eslint-disable-next-line
-                    console.warn(e)
-                })
-            },
-            fetchKeyspace: function () {
-                axios.get('/api/keyspace', {
-                    params: {
-                        host: this.host,
-                        keyspace: this.keyspace,
-                    }
-                }).then(res => {
-                    let decoded = res.data
-                    // TODO: check if there is error
-                    // TODO: anyway to give it type? ... now I miss typescript ...
-                    // eslint-disable-next-line
-                    console.log(decoded)
-                    this.keyspaceTables = decoded.tables
-
-                }, err => {
-                    // TODO: it seems when server 500, err does not contain body?
-                    // eslint-disable-next-line
-                    console.warn(err)
-                }).catch(e => {
-                    // eslint-disable-next-line
-                    console.warn(e)
-                })
+            this.cols = cols;
+            // eslint-disable-next-line
+            console.log(this.cols);
+            let rows = [];
+            if (data.rows != null) {
+              for (let v of data.rows) {
+                // eslint-disable-next-line
+                console.log(v);
+                rows.push(v);
+              }
             }
-        }
+            this.rows = rows;
+            // eslint-disable-next-line
+            console.log(this.rows);
+          },
+          err => {
+            // TODO: it seems when server 500, err does not contain body?
+            // eslint-disable-next-line
+            console.warn(err);
+          }
+        )
+        .catch(e => {
+          // eslint-disable-next-line
+          console.warn(e);
+        });
+    },
+    fetchKeyspace: function() {
+      axios
+        .get("/api/keyspace", {
+          params: {
+            host: this.host,
+            keyspace: this.keyspace
+          }
+        })
+        .then(
+          res => {
+            let decoded = res.data;
+            // TODO: check if there is error
+            // TODO: anyway to give it type? ... now I miss typescript ...
+            // eslint-disable-next-line
+            console.log(decoded);
+            this.keyspaceTables = decoded.tables;
+          },
+          err => {
+            // TODO: it seems when server 500, err does not contain body?
+            // eslint-disable-next-line
+            console.warn(err);
+          }
+        )
+        .catch(e => {
+          // eslint-disable-next-line
+          console.warn(e);
+        });
     }
+  }
+};
 </script>
 
 <style scoped>
-
 </style>

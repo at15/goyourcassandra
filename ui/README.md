@@ -35,3 +35,11 @@ INSERT INTO app.tb1 (id, s) VALUES (1, 'apptb11');
 INSERT INTO app.tb1 (id, s) VALUES (2, 'apptb12');
 SELECT * FROM app.tb1
 ````
+
+## UI
+
+- use https://github.com/ElemeFE/element
+
+````bash
+npm i element-ui -S
+````
