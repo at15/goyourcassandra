@@ -1,0 +1,26 @@
+host: localhost
+port: 9042
+user: cassandra
+password: cassandra
+keyspace: system
+keyspaces:
+- app
+templates:
+- name: create keyspace
+  description: create keyspace
+  # TODO: can you use ? in DDL maybe we should allow our own template holder, i.e. named parameter :keyspace
+  query: CREATE KEYSPACE ? WITH REPLICATION = {'class':'SimpleStrategy', 'replication_factor':1}
+  type: ddl
+  params:
+  - name: ks
+    type: string
+- name: select id 1
+  description: select value with id = 1
+  query: select * from tb1 where id = 1
+- name: select by id
+  description: select value based on id
+  query: select * from tb1 where id = ?
+  type: fetchOneRow
+  params:
+  - name: id
+    type: int

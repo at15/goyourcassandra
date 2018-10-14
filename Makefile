@@ -37,4 +37,4 @@ serve:
 	goyourcassandra
 
 reload: install
-	goyourcassandra
+	goyourcassandra --home $$GOPATH/src/github.com/at15/goyourcassandra/pkg/types/testdata

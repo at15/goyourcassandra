@@ -10,7 +10,15 @@
   version = "v1.4"
 
 [[projects]]
-  digest = "1:dfe631bd27411eefd80be792fb8ad8f3eb38b7fa848dd6e6df0d27752bcfa516"
+  digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"
+  name = "github.com/davecgh/go-spew"
+  packages = ["spew"]
+  pruneopts = "UT"
+  revision = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
+  version = "v1.1.1"
+
+[[projects]]
+  digest = "1:4c46762ffca852bf9c35c3e133af0e651d0ef4a8c1b4f4e348d52409a7e144fe"
   name = "github.com/dyweb/gommon"
   packages = [
     "errors",
@@ -19,6 +27,7 @@
     "util/color",
     "util/hashutil",
     "util/runtimeutil",
+    "util/testutil",
   ]
   pruneopts = "UT"
   revision = "1eed5cf307f93a74ac194ccca059beb2f93a14ac"
@@ -26,7 +35,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:1663a0422137343d2d99490f942a8d66149adffd7466c9699a0774cbe047e18a"
+  digest = "1:d21f3471df3c4109c9b7c5569363a082b9fcde4fea49e4ce332ad307cfc4e359"
   name = "github.com/gocql/gocql"
   packages = [
     ".",
@@ -35,7 +44,7 @@
     "internal/streams",
   ]
   pruneopts = "UT"
-  revision = "7ce14ecfedc6040abe54bd0a1dfaed2cf283e0a0"
+  revision = "44e29ed5b8a4b4fff39d7ebaa19976c6f852075b"
 
 [[projects]]
   branch = "master"
@@ -62,7 +71,15 @@
   version = "v1.0"
 
 [[projects]]
-  digest = "1:872fa275c31e1f9db31d66fa9b1d4a7bb9a080ff184e6977da01f36bfbe07f11"
+  digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
+  name = "github.com/pmezard/go-difflib"
+  packages = ["difflib"]
+  pruneopts = "UT"
+  revision = "792786c7400a136282c1664665ae0a8db921c6c2"
+  version = "v1.0.0"
+
+[[projects]]
+  digest = "1:645cabccbb4fa8aab25a956cbcbdf6a6845ca736b2c64e197ca7cbb9d210b939"
   name = "github.com/spf13/cobra"
   packages = ["."]
   pruneopts = "UT"
@@ -70,12 +87,20 @@
   version = "v0.0.3"
 
 [[projects]]
-  digest = "1:dab83a1bbc7ad3d7a6ba1a1cc1760f25ac38cdf7d96a5cdd55cd915a4f5ceaf9"
+  digest = "1:c1b1102241e7f645bc8e0c22ae352e8f0dc6484b6cb4d132fa9f24174e0119e2"
   name = "github.com/spf13/pflag"
   packages = ["."]
   pruneopts = "UT"
-  revision = "9a97c102cda95a86cec2345a6f09f55a939babf5"
-  version = "v1.0.2"
+  revision = "298182f68c66c05229eb03ac171abe6e309ee79a"
+  version = "v1.0.3"
+
+[[projects]]
+  digest = "1:18752d0b95816a1b777505a97f71c7467a8445b8ffb55631a7bf779f6ba4fa83"
+  name = "github.com/stretchr/testify"
+  packages = ["assert"]
+  pruneopts = "UT"
+  revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
+  version = "v1.2.2"
 
 [[projects]]
   digest = "1:2d1fbdc6777e5408cabeb02bf336305e724b925ff4546ded0fa8715a7267922a"
@@ -85,6 +110,14 @@
   revision = "d2d2541c53f18d2a059457998ce2876cc8e67cbf"
   version = "v0.9.1"
 
+[[projects]]
+  digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "5420a8b6744d3b0345ab293f6fcba19c978f1183"
+  version = "v2.2.1"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
@@ -92,8 +125,10 @@
     "github.com/chzyer/readline",
     "github.com/dyweb/gommon/errors",
     "github.com/dyweb/gommon/log",
+    "github.com/dyweb/gommon/util/testutil",
     "github.com/gocql/gocql",
     "github.com/spf13/cobra",
+    "github.com/stretchr/testify/assert",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

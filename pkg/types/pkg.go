@@ -8,6 +8,10 @@ import (
 
 var log = dlog.NewLibraryLogger()
 
+const (
+	HomeEnvKey = "GOYOURCASSANDRA_HOME"
+)
+
 // DataType is a merged struct of gocql.TypeInfo implementations
 type DataType struct {
 	// Type is for native simple type like int

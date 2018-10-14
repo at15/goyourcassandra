@@ -21,6 +21,7 @@ Web based Cassandra database browser, named after phpmyadmin
 make install
 goyourcassandra
 ````
+
 ## Dev
 
 ````bash
@@ -30,6 +31,7 @@ make run-c2
 make reload
 # start ui server
 cd ui && make serve
+# visit http://localhost:8080
 ````
 
 ## Related
