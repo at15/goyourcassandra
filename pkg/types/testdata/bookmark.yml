@@ -1,10 +1,12 @@
 host: localhost
 port: 9042
-user: cassandra
+username: cassandra
 password: cassandra
 keyspace: system
 keyspaces:
+- system
 - app
+- app2
 templates:
 - name: create keyspace
   description: create keyspace

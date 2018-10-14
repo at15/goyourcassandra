@@ -4,7 +4,7 @@ import locale from "element-ui/lib/locale/lang/en";
 import "element-ui/lib/theme-chalk/index.css";
 import App from "./App.vue";
 import router from "./router";
-import Axios from 'axios'
+import Axios from "axios";
 
 Vue.prototype.$http = Axios; // https://scotch.io/tutorials/vue-authentication-and-route-handling-using-vue-router
 Vue.config.productionTip = false;
