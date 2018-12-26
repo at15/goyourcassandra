@@ -8,14 +8,12 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import DB from '@/components/DB.vue'
+import DB from "@/components/DB.vue";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
-    HelloWorld,
     DB
   }
-}
+};
 </script>

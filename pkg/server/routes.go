@@ -16,6 +16,7 @@ func (srv *Server) routes() {
 	mux.HandleFunc("/api/ping", func(res http.ResponseWriter, req *http.Request) {
 		res.Write([]byte("api pong"))
 	})
+	mux.HandleFunc("/api/bookmark", srv.handleGetBookmarks)
 	mux.HandleFunc("/api/query", srv.handleQuery)
 	mux.HandleFunc("/api/keyspace", srv.handleKeyspace)
 	srv.mux = mux
